@@ -1,0 +1,10 @@
+Package: com.thomz.utrynashutdown
+Name: UTrynaShutDown
+Depends: mobilesubstrate
+Version: 1.1
+Architecture: iphoneos-arm
+Description: Prevent people from turning off your phone with a custom message
+Maintainer: Thomz
+Author: Thomz
+Section: Tweaks
+Icon: file:///Library/PreferenceBundles/UTrynaShutDown.bundle/icon@2x.png
