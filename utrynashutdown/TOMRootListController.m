@@ -53,7 +53,7 @@
 }
 
 
--(void){
+-(void)paypal{
 
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Thomz07"]];
 }
