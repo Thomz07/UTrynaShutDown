@@ -52,6 +52,12 @@
 	[alert show];
 }
 
+
+-(void){
+
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Thomz07"]];
+}
+
      -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
