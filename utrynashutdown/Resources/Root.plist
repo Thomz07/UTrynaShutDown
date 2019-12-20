@@ -28,6 +28,20 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>sublabel</key>
+			<string>If this is off, there will not be a title on your alert</string>
+			<key>key</key>
+			<string>titleEnabled</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>default</key>
+			<true/>			
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>label</key>
 			<string>Title Text</string>
@@ -36,6 +50,22 @@
 			<key>key</key>
 			<string>textOne</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>sublabel</key>
+			<string>If this is off, there will not be a message on your alert</string>
+			<key>key</key>
+			<string>messageEnabled</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>default</key>
+			<true/>	
+
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
@@ -48,9 +78,33 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Enable</string>
+			<key>sublabel</key>
+			<string>If this is off, the Dismiss text will be "Dismiss"</string>
+			<key>key</key>
+			<string>dismissEnabled</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>default</key>
+			<false/>	
+
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>label</key>
+			<string>Dismiss Text</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>key</key>
+			<string>textThree</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>footerText</key> 			
-			<string>If changes do not apply, respring your device</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -59,14 +113,22 @@
 			<string>Respring</string>
 			<key>action</key>
 			<string>respring</string>
+			<key>sublabel</key>
+			<string>It is not required but we never know</string>
 		</dict>
 		<dict>
 			<key>cell</key> 
 			<string>PSGroupCell</string>
-			<key>footerText</key> 	
-			<string>Developed with ♥ by @Thomz</string>
-			<key>footerAlignment</key> 	
-			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Developed with ♥ by Thomz</string>
+			<key>sublabel</key>
+			<string>If you like my work, consider buying me a coffee</string>
+			<key>action</key>
+			<string>paypal</string>
 		</dict>
 
 	</array>
