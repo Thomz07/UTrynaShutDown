@@ -1,6 +1,6 @@
 Package: com.thomz.utrynashutdown
 Name: UTrynaShutDown
-Depends: mobilesubstrate
+Depends: mobilesubstrate, preferenceloader, com.spark.libsparkcolourpicker
 Version: 1.2
 Architecture: iphoneos-arm
 Description: Prevent people from turning off your phone with a custom message
