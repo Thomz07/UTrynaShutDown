@@ -2,7 +2,7 @@ include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = UTrynaShutDown
 
-UTrynaShutDown_FILES = TOMRootListController.m
+UTrynaShutDown_FILES = TOMRootListController.m 
 UTrynaShutDown_INSTALL_PATH = /Library/PreferenceBundles
 UTrynaShutDown_FRAMEWORKS = UIKit
 UTrynaShutDown_PRIVATE_FRAMEWORKS = Preferences

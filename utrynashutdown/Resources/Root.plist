@@ -4,9 +4,12 @@
 <dict>
 	<key>items</key>
 	<array>
+		
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>NOTE : Respring is not required</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -22,10 +25,27 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>label</key>
+			<string>Disable Power menu</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>key</key>
+			<string>showNothing</string>
+			<key>sublabel</key>
+			<string>Disable Power down menu and show nothing</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Alert Texts</string>
+			<key>footerText</key>
+			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text</string>
 		</dict>
+		
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -105,30 +125,52 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Emergency alert</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSButtonCell</string>
+			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Respring</string>
-			<key>action</key>
-			<string>respring</string>
-			<key>sublabel</key>
-			<string>It is not required but we never know</string>
+			<string>Disable the emergency alerts</string>
+			<key>key</key>
+			<string>emergencyAlert</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>default</key>
+			<false/>			
 		</dict>
 		<dict>
 			<key>cell</key> 
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Developers</string>
+			<key>footerText</key>
+			<string>If you like our work, pay us a coffee</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Developed with ♥ by Thomz</string>
+			<string>Thomz</string>
 			<key>sublabel</key>
-			<string>If you like my work, consider buying me a coffee</string>
+			<string>@Thomzi07 - u/Thomz07</string>
 			<key>action</key>
 			<string>paypal</string>
+			<key>height</key>
+			<integer>80</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>ExoticSwingset</string>
+			<key>sublabel</key>
+			<string>@ExoticSwingset - u/ExoticSwingset</string>
+			<key>action</key>
+			<string>paypal2</string>
+			<key>height</key>
+			<integer>80</integer>
 		</dict>
 
 	</array>
