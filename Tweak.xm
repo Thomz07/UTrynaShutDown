@@ -21,7 +21,6 @@
 
     id textUn = (NSString *)[defaults valueForKey:@"textOne"];
     NSString *textFirst;
-    textFirst = [NSString stringWithFormat:@"%@",textUn];
 
     id titleEnabled = [defaults valueForKey:@"titleEnabled"];
 
@@ -29,7 +28,6 @@
 
     id textDeux = (NSString *)[defaults valueForKey:@"textTwo"];
     NSString *textSecond;
-    textSecond = [NSString stringWithFormat:@"%@",textDeux];
 
     id messageEnabled = [defaults valueForKey:@"messageEnabled"];
 
@@ -37,7 +35,6 @@
 
     id textTrois = (NSString *)[defaults valueForKey:@"textThree"];
     NSString *textThird;
-    textThird = [NSString stringWithFormat:@"%@",textTrois];
 
     id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
 
@@ -46,38 +43,54 @@
     UIAlertView *alertView;
 
         if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = nil;
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = nil;
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = nil;
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else {
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        
     }
 
-    /* Enable switch */
+    alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+    /* Enable switch and Emergency alert switch */
 
     id disableEverything = [defaults valueForKey:@"showNothing"];
     id isEnabled = [defaults valueForKey:@"isEnabled"];
@@ -110,7 +123,6 @@
 
     id textUn = (NSString *)[defaults valueForKey:@"textOne"];
     NSString *textFirst;
-    textFirst = [NSString stringWithFormat:@"%@",textUn];
 
     id titleEnabled = [defaults valueForKey:@"titleEnabled"];
 
@@ -118,7 +130,6 @@
 
     id textDeux = (NSString *)[defaults valueForKey:@"textTwo"];
     NSString *textSecond;
-    textSecond = [NSString stringWithFormat:@"%@",textDeux];
 
     id messageEnabled = [defaults valueForKey:@"messageEnabled"];
 
@@ -126,7 +137,6 @@
 
     id textTrois = (NSString *)[defaults valueForKey:@"textThree"];
     NSString *textThird;
-    textThird = [NSString stringWithFormat:@"%@",textTrois];
 
     id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
 
@@ -135,38 +145,54 @@
     UIAlertView *alertView;
 
         if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@0]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = nil;
+        textThird = @"Dismiss";
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = nil;
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = nil;
+        textSecond = [NSString stringWithFormat:@"%@",textDeux];
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+        textFirst = [NSString stringWithFormat:@"%@",textUn];
+        textSecond = nil;
+        textThird = [NSString stringWithFormat:@"%@",textTrois];
     }
 
     else {
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        
     }
 
-    /* Enable switch */
+    alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+    /* Enable switch and Emergency alert switch */
 
     id showNothing = [defaults valueForKey:@"showNothing"];
     id isEnabled = [defaults valueForKey:@"isEnabled"];
