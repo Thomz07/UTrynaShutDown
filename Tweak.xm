@@ -17,7 +17,7 @@
 
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
 
-       /* Title text */
+ /* Title Text */
 
     id textUn = (NSString *)[defaults valueForKey:@"textOne"];
     NSString *textFirst;
@@ -333,8 +333,6 @@
 %hook SOSManager
 +(BOOL)shouldTriggerSOS {
 
-    NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
-
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
 
     id emergencyAlert = [defaults valueForKey:@"emergencyAlert"];
@@ -349,6 +347,7 @@
 %end
 %end
 
+
 %ctor {
 
     %init(SOS);
@@ -356,8 +355,13 @@
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"13")){
         %init(ios13);
 
+
     } else {
         %init(ios12);
 
     }
+
 }
+
+
+

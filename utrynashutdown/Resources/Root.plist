@@ -4,12 +4,12 @@
 <dict>
 	<key>items</key>
 	<array>
-		
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>NOTE : Respring is not required</string>
+
+			<string>Note: No respring required. "Show Nothing" option disables alerts all together and makes it so that no alert shows when trying to power down.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -29,13 +29,16 @@
 			<key>default</key>
 			<false/>
 			<key>label</key>
-			<string>Disable Power menu</string>
+
+			<string>Show Nothing</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
 			<string>showNothing</string>
+
 			<key>sublabel</key>
 			<string>Disable Power down menu and show nothing</string>
+
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -45,20 +48,17 @@
 			<key>footerText</key>
 			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text</string>
 		</dict>
-		
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, there will not be a title on your alert</string>
 			<key>key</key>
 			<string>titleEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<true/>			
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -75,14 +75,12 @@
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, there will not be a message on your alert</string>
 			<key>key</key>
 			<string>messageEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<true/>	
+			<true/>
 
 		</dict>
 
@@ -101,14 +99,12 @@
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, the Dismiss text will be "Dismiss"</string>
 			<key>key</key>
 			<string>dismissEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<false/>	
+			<false/>
 
 		</dict>
 
@@ -127,6 +123,9 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Emergency alert</string>
+
+			<key>footerText</key>
+			<string>Prevents the emergency SOS power down menu from showing</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -138,15 +137,16 @@
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<false/>			
+
+			<false/>
 		</dict>
 		<dict>
-			<key>cell</key> 
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Developers</string>
 			<key>footerText</key>
-			<string>If you like our work, pay us a coffee</string>
+			<string>If you like our work, pay us a coffee.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
