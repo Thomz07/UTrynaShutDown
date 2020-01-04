@@ -13,9 +13,11 @@
 %hook SBPowerDownController
 -(void)orderFront {
 
+    SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
+
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
 
-	/* Title text */
+       /* Title text */
 
     id textUn = (NSString *)[defaults valueForKey:@"textOne"];
     NSString *textFirst;
@@ -37,7 +39,7 @@
     NSString *textThird;
     textThird = [NSString stringWithFormat:@"%@",textTrois];
 
- 
+
     id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
 
 
@@ -98,18 +100,15 @@
     id disableEverything = [defaults valueForKey:@"showNothing"];
     id isEnabled = [defaults valueForKey:@"isEnabled"];
 
-    if([disableEverything isEqual:@0]){
-    if([isEnabled isEqual:@0]){
-    %orig;
-
+    if ([isEnabled isEqual:@0]) {
+      %orig;
+    } else if (![lockManager hasBeenDismissedSinceKeybagLock]) {
+      if ([disableEverything isEqual:@0]) {
+        [alertView show];
+      } else {}
     } else {
-        [alertView show];   
+      %orig;
     }
-
-        } else {
-
-
-}
 }
 %end
 %end
@@ -119,6 +118,8 @@
 %hook SBPowerDownViewController
 
 -(void)powerDownViewDidBeginSlide:(id)arg1 {
+
+    SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
 
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
 
@@ -208,28 +209,21 @@
 
     /* Enable switch */
 
-    
-    id showNothing = [defaults valueForKey:@"showNothing"];
     id isEnabled = [defaults valueForKey:@"isEnabled"];
+    id disableEverything = [defaults valueForKey:@"showNothing"];
 
-    if([showNothing isEqual:@1]){
-
-
+    if ([isEnabled isEqual:@0]) {
+      %orig;
+    } else if (![lockManager hasBeenDismissedSinceKeybagLock]) {
+      if ([disableEverything isEqual:@0]) {
+        [alertView show];
+      } else {}
     } else {
-
-    if([isEnabled isEqual:@0]){
-    %orig;
-
-} else {
-    [alertView show];   
+      %orig;
+    }
 }
 
-}
-}
-
-
-
-%end 
+%end
 %end
 
 %group SOS
@@ -239,20 +233,99 @@
 
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
 
+    /* Title text */
+
+   id textUn = (NSString *)[defaults valueForKey:@"textOne"];
+   NSString *textFirst;
+   textFirst = [NSString stringWithFormat:@"%@",textUn];
+
+   id titleEnabled = [defaults valueForKey:@"titleEnabled"];
+
+   /* Message text */
+
+   id textDeux = (NSString *)[defaults valueForKey:@"textTwo"];
+   NSString *textSecond;
+   textSecond = [NSString stringWithFormat:@"%@",textDeux];
+
+   id messageEnabled = [defaults valueForKey:@"messageEnabled"];
+
+   /* Dismiss Text */
+
+   id textTrois = (NSString *)[defaults valueForKey:@"textThree"];
+   NSString *textThird;
+   textThird = [NSString stringWithFormat:@"%@",textTrois];
+
+
+   id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
+
+
+   /* Texts enable */
+
+   UIAlertView *alertView;
+
+       if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@0]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:nil message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+   }
+
+   else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
+
+       alertView = [[UIAlertView alloc]initWithTitle:textFirst message:nil delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
+
+   }
+
+   else {
+
+       alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+
+   }
+
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
+
     id emergencyAlert = [defaults valueForKey:@"emergencyAlert"];
     id disableEverything = [defaults valueForKey:@"showNothing"];
+    id isEnabled = [defaults valueForKey:@"isEnabled"];
 
-    if ([disableEverything isEqual:@1]){
-
+    if ([isEnabled isEqual:@0]) {
+      %orig;
+    } else if (![lockManager hasBeenDismissedSinceKeybagLock] && [emergencyAlert isEqual:@1]) {
+      if ([disableEverything isEqual:@0]) {
+        [alertView show];
+      } else {}
     } else {
-
-    if([emergencyAlert isEqual:@1] && ![lockManager hasBeenDismissedSinceKeybagLock]){
-     
-    } else {
-        %orig;   
+      %orig;
     }
-  }  
 }
 %end
 
@@ -263,30 +336,18 @@
     NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
 
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
-    
+
     id emergencyAlert = [defaults valueForKey:@"emergencyAlert"];
-    id disableEverything = [defaults valueForKey:@"showNothing"];
+    id isEnabled = [defaults valueForKey:@"isEnabled"];
 
-    if([disableEverything isEqual:@1]){
-
-        
-        return NO;
+    if (![lockManager hasBeenDismissedSinceKeybagLock] && [emergencyAlert isEqual:@1] && [isEnabled isEqual:@1]) {
+      return NO;
     } else {
-
-    if([emergencyAlert isEqual:@1] && ![lockManager hasBeenDismissedSinceKeybagLock]) {
-        
-        return NO;
-        
-    } else {
-       
-        return YES;
-     
+      return %orig;
     }
-  }
 }
-
 %end
-%end 
+%end
 
 %ctor {
 
@@ -294,9 +355,9 @@
 
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"13")){
         %init(ios13);
-        
+
     } else {
         %init(ios12);
-        
+
     }
 }
