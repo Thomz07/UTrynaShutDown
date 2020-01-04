@@ -4,11 +4,11 @@
 <dict>
 	<key>items</key>
 	<array>
-
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
+
 			<string>Note: No respring required. "Show Nothing" option disables alerts all together and makes it so that no alert shows when trying to power down.</string>
 		</dict>
 		<dict>
@@ -29,11 +29,16 @@
 			<key>default</key>
 			<false/>
 			<key>label</key>
+
 			<string>Show Nothing</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
 			<string>showNothing</string>
+
+			<key>sublabel</key>
+			<string>Disable Power down menu and show nothing</string>
+
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -41,9 +46,8 @@
 			<key>label</key>
 			<string>Alert Texts</string>
 			<key>footerText</key>
-			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text.</string>
+			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text</string>
 		</dict>
-
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -119,8 +123,9 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Emergency alert</string>
+
 			<key>footerText</key>
-			<string>Prevents the emergency SOS power down menu from showing on lockscreen.</string>
+			<string>Prevents the emergency SOS power down menu from showing</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -132,6 +137,7 @@
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
+
 			<false/>
 		</dict>
 		<dict>
