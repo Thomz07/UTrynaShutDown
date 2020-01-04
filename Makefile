@@ -2,8 +2,6 @@ ARCHS= armv7 arm64 arm64e
 
 INSTALL_TARGET_PROCESSES = SpringBoard
 
-include ~/theos/makefiles/common.mk
-
 TWEAK_NAME = UTrynaShutDown
 
 UTrynaShutDown_FILES = Tweak.xm
