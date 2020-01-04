@@ -34,7 +34,16 @@
 
 
 
+
+
+
+
 #include "TOMRootListController.h"
+
+
+
+
+
 
 @implementation TOMRootListController
 
@@ -43,7 +52,29 @@
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 	}
 
+	[[UISwitch appearanceWhenContainedInInstancesOfClasses:@[[TOMRootListController class]]] setOnTintColor:[UIColor colorWithRed:1.00 green:0.37 blue:0.37 alpha:1.0]];
+	
+
+
 	return _specifiers;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+
+	/* Icon at the top */
+
+	NSBundle *bundle = [[NSBundle alloc]initWithPath:@"/Library/PreferenceBundles/UTrynaShutDown.bundle"];
+
+	UIImage *logo = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"icon" ofType:@"png"]];
+	self.navigationItem.titleView = [[UIImageView alloc]initWithImage:logo];
+
+	/* Respring Button */
+
+	UIBarButtonItem *respringButton = [[UIBarButtonItem alloc] initWithTitle:@"Respring" style:UIBarButtonItemStylePlain target:self action:@selector(respring)];
+    self.navigationItem.rightBarButtonItem = respringButton;
+
+
 }
 
 -(void)respring{
@@ -56,6 +87,11 @@
 -(void)paypal{
 
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Thomz07"]];
+}
+
+-(void)paypal2{
+
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.paypal.me/jdslandscaping"]];
 }
 
      -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

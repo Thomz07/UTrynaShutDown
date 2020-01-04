@@ -4,9 +4,12 @@
 <dict>
 	<key>items</key>
 	<array>
+
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Note: No respring required. "Show Nothing" option disables alerts all together and makes it so that no alert shows when trying to power down.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -22,23 +25,36 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>label</key>
+			<string>Show Nothing</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>key</key>
+			<string>showNothing</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Alert Texts</string>
+			<key>footerText</key>
+			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text.</string>
 		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, there will not be a title on your alert</string>
 			<key>key</key>
 			<string>titleEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<true/>			
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -55,14 +71,12 @@
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, there will not be a message on your alert</string>
 			<key>key</key>
 			<string>messageEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<true/>	
+			<true/>
 
 		</dict>
 
@@ -81,14 +95,12 @@
 			<string>PSSwitchCell</string>
 			<key>label</key>
 			<string>Enable</string>
-			<key>sublabel</key>
-			<string>If this is off, the Dismiss text will be "Dismiss"</string>
 			<key>key</key>
 			<string>dismissEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-			<false/>	
+			<false/>
 
 		</dict>
 
@@ -105,30 +117,54 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Emergency alert</string>
+			<key>footerText</key>
+			<string>Prevents the emergency SOS power down menu from showing on lockscreen.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSButtonCell</string>
+			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Respring</string>
-			<key>action</key>
-			<string>respring</string>
-			<key>sublabel</key>
-			<string>It is not required but we never know</string>
+			<string>Disable the emergency alerts</string>
+			<key>key</key>
+			<string>emergencyAlert</string>
+			<key>defaults</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>default</key>
+			<false/>
 		</dict>
 		<dict>
-			<key>cell</key> 
+			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Developers</string>
+			<key>footerText</key>
+			<string>If you like our work, pay us a coffee.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Developed with ♥ by Thomz</string>
+			<string>Thomz</string>
 			<key>sublabel</key>
-			<string>If you like my work, consider buying me a coffee</string>
+			<string>@Thomzi07 - u/Thomz07</string>
 			<key>action</key>
 			<string>paypal</string>
+			<key>height</key>
+			<integer>80</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>ExoticSwingset</string>
+			<key>sublabel</key>
+			<string>@ExoticSwingset - u/ExoticSwingset</string>
+			<key>action</key>
+			<string>paypal2</string>
+			<key>height</key>
+			<integer>80</integer>
 		</dict>
 
 	</array>
