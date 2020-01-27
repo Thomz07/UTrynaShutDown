@@ -1,112 +1,110 @@
 /* UTrynaShutDown by Thomz and ExoticSwingset */
 
+#include <Cephei/HBPreferences.h>
+
 @interface SBCoverSheetPresentationManager
 -(bool)hasBeenDismissedSinceKeybagLock;
 +(id)sharedInstance;
 @end
 
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+        HBPreferences *preferences;
+        BOOL isEnabled;
+        BOOL showNothing;
+        BOOL titleEnabled;
+        BOOL messageEnabled;
+        BOOL dismissEnabled;
+        BOOL emergencyAlert;
+        NSString *textOne;
+        NSString *textTwo;
+        NSString *textThree;
+
+        #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+        #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+        #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+        #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+        #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+    void prefs(){
+
+        preferences = [[HBPreferences alloc] initWithIdentifier:@"com.thomz.utrynashutdown"];
+        [preferences registerDefaults:@{
+            @"isEnabled": @YES,
+            @"showNothing": @NO,
+            @"titleEnabled":@YES,
+            @"messageEnabled":@YES,
+            @"dismissEnabled":@NO,
+            @"emergencyAlert":@NO,
+            @"textOne": @"",
+            @"textTwo": @"",
+            @"textThree": @""
+        }];
+
+        [preferences registerBool:&isEnabled default:YES forKey:@"isEnabled"];
+        [preferences registerBool:&showNothing default:NO forKey:@"showNothing"];
+        [preferences registerBool:&titleEnabled default:YES forKey:@"titleEnabled"];
+        [preferences registerBool:&messageEnabled default:YES forKey:@"messageEnabled"];
+        [preferences registerBool:&dismissEnabled default:NO forKey:@"dismissEnabled"];
+        [preferences registerBool:&emergencyAlert default:YES forKey:@"emergencyAlert"];
+        [preferences registerObject:&textOne default:@"Hello" forKey:@"textOne"];
+        [preferences registerObject:&textTwo default:@"This is the default value" forKey:@"textTwo"];
+        [preferences registerObject:&textThree default:@"Dismiss" forKey:@"textThree"];
+
+    }
+
+
 
 %group ios12
 %hook SBPowerDownController
 -(void)orderFront {
 
-    NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
+    prefs();
 
-    /* Title text */
-
-    id textUn = (NSString *)[defaults valueForKey:@"textOne"];
-    NSString *textFirst;
-
-    id titleEnabled = [defaults valueForKey:@"titleEnabled"];
-
-    /* Message text */
-
-    id textDeux = (NSString *)[defaults valueForKey:@"textTwo"];
-    NSString *textSecond;
-
-    id messageEnabled = [defaults valueForKey:@"messageEnabled"];
-
-    /* Dismiss Text */
-
-    id textTrois = (NSString *)[defaults valueForKey:@"textThree"];
-    NSString *textThird;
-
-    id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
-
-    /* Texts enable */
+    if(isEnabled){
 
     UIAlertView *alertView;
 
-        if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    if(titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = @"Dismiss";
+    else if(titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        textFirst = nil;
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = @"Dismiss";
+    else if(!titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@0]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = nil;
-        textThird = @"Dismiss";
+    else if(titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        textFirst = nil;
-        textSecond = nil;
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(!titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        textFirst = nil;
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(!titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = nil;
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else {
-        
-    }
+    else if(!titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }  
 
-    alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
-
-    /* Enable switch and Emergency alert switch */
-
-    id disableEverything = [defaults valueForKey:@"showNothing"];
-    id isEnabled = [defaults valueForKey:@"isEnabled"];
-
-    if([disableEverything isEqual:@0]){
-    if([isEnabled isEqual:@0]){
-    
-    %orig;
+    if(showNothing){
 
     } else {
-
-        [alertView show]; 
-
-    }} else {
-
-  }
+        [alertView show];
+    }
+    
+    } else {
+        %orig;
+    }
+    
 }
 %end
 %end
@@ -115,104 +113,58 @@
 %group ios13
 %hook SBPowerDownViewController
 
--(void)powerDownViewDidBeginSlide:(id)arg1 {
+-(void)viewWillAppear:(BOOL)arg1 {
 
-    NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
+    prefs();
 
-    /* Title text */
-
-    id textUn = (NSString *)[defaults valueForKey:@"textOne"];
-    NSString *textFirst;
-
-    id titleEnabled = [defaults valueForKey:@"titleEnabled"];
-
-    /* Message text */
-
-    id textDeux = (NSString *)[defaults valueForKey:@"textTwo"];
-    NSString *textSecond;
-
-    id messageEnabled = [defaults valueForKey:@"messageEnabled"];
-
-    /* Dismiss Text */
-
-    id textTrois = (NSString *)[defaults valueForKey:@"textThree"];
-    NSString *textThird;
-
-    id dismissEnabled = [defaults valueForKey:@"dismissEnabled"];
-
-    /* Texts enable */
+    if(isEnabled){
 
     UIAlertView *alertView;
 
-        if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    if(titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = @"Dismiss";
+    else if(titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@0]){
-        textFirst = nil;
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = @"Dismiss";
+    else if(!titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@0]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = nil;
-        textThird = @"Dismiss";
+    else if(titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        textFirst = nil;
-        textSecond = nil;
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(!titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@0] && [messageEnabled isEqual:@1] && [dismissEnabled isEqual:@1]){
-        textFirst = nil;
-        textSecond = [NSString stringWithFormat:@"%@",textDeux];
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(!titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else if([titleEnabled isEqual:@1] && [messageEnabled isEqual:@0] && [dismissEnabled isEqual:@1]){
-        textFirst = [NSString stringWithFormat:@"%@",textUn];
-        textSecond = nil;
-        textThird = [NSString stringWithFormat:@"%@",textTrois];
+    else if(titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
     }
 
-    else {
-        
-    }
+    else if(!titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }  
 
-    alertView = [[UIAlertView alloc]initWithTitle:textFirst message:textSecond delegate:self cancelButtonTitle:textThird otherButtonTitles:nil];
-
-    /* Enable switch and Emergency alert switch */
-
-    id showNothing = [defaults valueForKey:@"showNothing"];
-    id isEnabled = [defaults valueForKey:@"isEnabled"];
-
-    if([showNothing isEqual:@1]){
-
+    if(showNothing){
+        %orig(NO);
     } else {
-
-    if([isEnabled isEqual:@0]){
+        %orig(NO);
+        [alertView show];
+    }
     
-    %orig;
-
     } else {
-
-    [alertView show];  
-
+        %orig(YES);
     }
-  }
-}
 
+}
 %end 
 %end
 
@@ -221,53 +173,95 @@
 
 -(void)_presentSOSInterface {
 
-    NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
+    prefs();
+
+    if(isEnabled){
+
+    UIAlertView *alertView;
+
+    if(titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+    }
+
+    else if(titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
+
+    else if(!titleEnabled && messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
+
+    else if(titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
+
+    else if(!titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+    }
+
+    else if(!titleEnabled && messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+    }
+
+    else if(titleEnabled && !messageEnabled && dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+    }
+
+    else if(!titleEnabled && !messageEnabled && !dismissEnabled){
+        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    }
 
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
 
-    id emergencyAlert = [defaults valueForKey:@"emergencyAlert"];
-    id disableEverything = [defaults valueForKey:@"showNothing"];
-
-    if ([disableEverything isEqual:@1]){
+    if (showNothing){
 
     } else {
 
-    if([emergencyAlert isEqual:@1] && ![lockManager hasBeenDismissedSinceKeybagLock]){
+    if(emergencyAlert && ![lockManager hasBeenDismissedSinceKeybagLock]){
      
     } else {
-        %orig;   
+        [alertView show];   
+            }
+        }  
     }
-  }  
 }
+
 %end
 
 
 %hook SOSManager
 +(BOOL)shouldTriggerSOS {
 
-    NSDictionary *defaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.thomz.utrynashutdown"];
+    prefs();
+
+    if(isEnabled){
 
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
-    
-    id emergencyAlert = [defaults valueForKey:@"emergencyAlert"];
-    id disableEverything = [defaults valueForKey:@"showNothing"];
 
-    if([disableEverything isEqual:@1]){
+    if (showNothing){
         return NO;
     } else {
 
-    if([emergencyAlert isEqual:@1] && ![lockManager hasBeenDismissedSinceKeybagLock]) {  
-        return NO;      
+    if(emergencyAlert && ![lockManager hasBeenDismissedSinceKeybagLock]){
+        return NO;
     } else {
-        return %orig;  
+        return %orig;   
     }
-  }
+    } 
+    } else {
+
+        return %orig;
+    }
 }
 
 %end
 %end 
 
+
+
 %ctor {
+
+    prefs();
 
     %init(SOS);
 
@@ -276,4 +270,6 @@
     } else {
         %init(ios12);   
     }
+
+    
 }

@@ -6,9 +6,19 @@
 	<array>
 		<dict>
 			<key>cell</key>
-			<string>PSGroupCell</string>
+    		<string>PSGroupCell</string>
+			<key>headerCellClass</key>
+			<string>HBPackageNameHeaderCell</string>
+			<key>label</key>
+			<string>UTrynaShutDown</string>
+			<key>packageIdentifier</key>
+			<string>com.thomz.utrynashutdown</string>
+			<key>backgroundGradientColors</key>
+                <array>
+                    <string>#ff5e6c</string>
+                    <string>#ff4757</string>
+                </array>
 			<key>footerText</key>
-
 			<string>Note: No respring required. "Show Nothing" option disables alerts all together and makes it so that no alert shows when trying to power down.</string>
 		</dict>
 		<dict>
@@ -123,7 +133,6 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Emergency alert</string>
-
 			<key>footerText</key>
 			<string>Prevents the emergency SOS power down menu from showing</string>
 		</dict>
@@ -149,28 +158,20 @@
 			<string>If you like our work, pay us a coffee.</string>
 		</dict>
 		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
 			<key>label</key>
 			<string>Thomz</string>
-			<key>sublabel</key>
-			<string>@Thomzi07 - u/Thomz07</string>
-			<key>action</key>
-			<string>paypal</string>
-			<key>height</key>
-			<integer>80</integer>
+			<key>user</key>
+			<string>Thomzi07</string>
 		</dict>
 		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
 			<key>label</key>
 			<string>ExoticSwingset</string>
-			<key>sublabel</key>
-			<string>@ExoticSwingset - u/ExoticSwingset</string>
-			<key>action</key>
-			<string>paypal2</string>
-			<key>height</key>
-			<integer>80</integer>
+			<key>user</key>
+			<string>ExoticSwingset</string>
 		</dict>
 
 	</array>

@@ -52,7 +52,7 @@
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 	}
 
-	[[UISwitch appearanceWhenContainedInInstancesOfClasses:@[[TOMRootListController class]]] setOnTintColor:[UIColor colorWithRed:1.00 green:0.37 blue:0.37 alpha:1.0]];
+	[[UISwitch appearanceWhenContainedInInstancesOfClasses:@[[TOMRootListController class]]] setOnTintColor:[UIColor colorWithRed:1.00 green:0.37 blue:0.42 alpha:1.0]];
 	
 
 
@@ -74,6 +74,25 @@
 	UIBarButtonItem *respringButton = [[UIBarButtonItem alloc] initWithTitle:@"Respring" style:UIBarButtonItemStylePlain target:self action:@selector(respring)];
     self.navigationItem.rightBarButtonItem = respringButton;
 
+
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offsetY = scrollView.contentOffset.y;
+
+    if (offsetY > 100) {
+        [UIView animateWithDuration:0.2 animations:^{
+         
+			self.navigationItem.titleView.alpha = 0.0;
+        }];
+    } else {
+        [UIView animateWithDuration:0.2 animations:^{
+            	self.navigationItem.titleView.alpha = 1.0;
+				
+        }];
+    }
+
+    if (offsetY > 0) offsetY = 0;
 
 }
 

@@ -1,5 +1,5 @@
-include ~/theos/makefiles/common.mk
-ARCHS = armv7 arm64 arm64e
+include $(THEOS)/makefiles/common.mk
+
 BUNDLE_NAME = UTrynaShutDown
 
 UTrynaShutDown_FILES = TOMRootListController.m 
@@ -7,8 +7,9 @@ UTrynaShutDown_INSTALL_PATH = /Library/PreferenceBundles
 UTrynaShutDown_FRAMEWORKS = UIKit
 UTrynaShutDown_PRIVATE_FRAMEWORKS = Preferences
 UTrynaShutDown_CFLAGS = -fobjc-arc
+UTrynaShutDown_EXTRA_FRAMEWORKS += Cephei CepheiPrefs
 
-include ~/theos/makefiles/bundle.mk
+include $(THEOS_MAKE_PATH)/bundle.mk
 
 internal-stage::
 	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/Library/PreferenceLoader/Preferences$(ECHO_END)
