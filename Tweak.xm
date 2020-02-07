@@ -46,7 +46,7 @@
         [preferences registerBool:&dismissEnabled default:NO forKey:@"dismissEnabled"];
         [preferences registerBool:&emergencyAlert default:YES forKey:@"emergencyAlert"];
         [preferences registerObject:&textOne default:@"Hello" forKey:@"textOne"];
-        [preferences registerObject:&textTwo default:@"This is the default value" forKey:@"textTwo"];
+        [preferences registerObject:&textTwo default:@"Thank you for downloading UTrynaShutDown" forKey:@"textTwo"];
         [preferences registerObject:&textThree default:@"Dismiss" forKey:@"textThree"];
 
     }

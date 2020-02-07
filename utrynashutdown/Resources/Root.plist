@@ -4,7 +4,7 @@
 <dict>
 	<key>items</key>
 	<array>
-		<dict>
+		<!--<dict>
 			<key>cell</key>
     		<string>PSGroupCell</string>
 			<key>headerCellClass</key>
@@ -19,7 +19,21 @@
                     <string>#ff4757</string>
                 </array>
 			<key>footerText</key>
-			<string>Note: No respring required. "Show Nothing" option disables alerts all together and makes it so that no alert shows when trying to power down.</string>
+			<string>Note: Respring is not required</string>
+		</dict>-->
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>CustomCell</string>
+			<key>height</key>
+			<integer>100</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Note: Respring is not required</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -39,31 +53,28 @@
 			<key>default</key>
 			<false/>
 			<key>label</key>
-
 			<string>Show Nothing</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
 			<string>showNothing</string>
-
 			<key>sublabel</key>
 			<string>Disable Power down menu and show nothing</string>
-
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Alert Texts</string>
-			<key>footerText</key>
-			<string>If you just get a Dismiss button after install, enable Dismiss custom text, trigger the alert and disable the Dismiss custom text</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Enable</string>
+			<string>Title Text</string>
 			<key>key</key>
+			<string>titleEnabled</string>
+			<key>tag</key>
 			<string>titleEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
@@ -73,59 +84,59 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>label</key>
-			<string>Title Text</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
+			<string>textOne</string>
+			<key>tag</key>
 			<string>textOne</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Enable</string>
+			<string>Message Text</string>
 			<key>key</key>
+			<string>messageEnabled</string>
+			<key>tag</key>
 			<string>messageEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
 			<true/>
-
 		</dict>
-
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>label</key>
-			<string>Message Text</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
+			<string>textTwo</string>
+			<key>tag</key>
 			<string>textTwo</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Enable</string>
+			<string>Dismiss Text</string>
 			<key>key</key>
+			<string>dismissEnabled</string>
+			<key>tag</key>
 			<string>dismissEnabled</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
 			<false/>
-
 		</dict>
-
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
-			<key>label</key>
-			<string>Dismiss Text</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>key</key>
+			<string>textThree</string>
+			<key>tag</key>
 			<string>textThree</string>
 		</dict>
 		<dict>
@@ -140,13 +151,12 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>Disable the emergency alerts</string>
+			<string>Disable the Emergency Alerts</string>
 			<key>key</key>
 			<string>emergencyAlert</string>
 			<key>defaults</key>
 			<string>com.thomz.utrynashutdown</string>
 			<key>default</key>
-
 			<false/>
 		</dict>
 		<dict>
@@ -154,8 +164,6 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Developers</string>
-			<key>footerText</key>
-			<string>If you like our work, pay us a coffee.</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -173,7 +181,59 @@
 			<key>user</key>
 			<string>ExoticSwingset</string>
 		</dict>
-
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Links</string>
+		</dict>
+		<dict>
+		    <key>cellClass</key>
+		    <string>HBLinkTableCell</string>
+		    <key>icon</key>
+		    <string>github.png</string>
+		    <key>label</key>
+		    <string>Github</string>
+		    <key>url</key>
+		    <string>https://github.com/Thomz07/UTrynaShutDown</string>
+			<key>subtitle</key>
+    		<string>Check out Source Code</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+		    <string>HBLinkTableCell</string>
+		    <key>icon</key>
+		    <string>icon.png</string>
+		    <key>label</key>
+		    <string>UTrynaShutDown</string>
+		    <key>url</key>
+		    <string>https://github.com/Thomz07/UTrynaShutDown</string>
+			<key>subtitle</key>
+    		<string>Check out Package Depiction</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Restore Preferences</string>
+			<key>action</key>
+			<string>resetPrefs:</string>
+			<key>isDestructive</key>
+			<true/>
+			<key>confirmation</key>
+			<dict>
+				<key>prompt</key>
+				<string>Are you sure you want to restore the preferences ?</string>
+				<key>title</key>
+				<string>Restore preferences</string>
+				<key>cancelTitle</key>
+				<string>Cancel</string>
+			</dict>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>UTrynaShutDown</string>
