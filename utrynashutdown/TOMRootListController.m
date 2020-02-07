@@ -4,42 +4,7 @@
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Preferences/PSTableCell.h>
 
-@interface NSTask : NSObject
-@property(copy) NSArray *arguments;
-@property(copy) NSString *currentDirectoryPath;
-@property(copy) NSDictionary *environment;
-@property(copy) NSString *launchPath;
-@property(readonly) int processIdentifier;
-@property long long qualityOfService;
-@property(getter=isRunning, readonly) bool running;
-@property(retain) id standardError;
-@property(retain) id standardInput;
-@property(retain) id standardOutput;
-@property(copy) id /* block */ terminationHandler;
-@property(readonly) long long terminationReason;
-@property(readonly) int terminationStatus;
-
-+ (id)currentTaskDictionary;
-+ (id)launchedTaskWithDictionary:(id)arg1;
-+ (id)launchedTaskWithLaunchPath:(id)arg1 arguments:(id)arg2;
-
-- (id)init;
-- (void)interrupt;
-- (bool)isRunning;
-- (void)launch;
-- (int)processIdentifier;
-- (long long)qualityOfService;
-- (bool)resume;
-- (bool)suspend;
-- (long long)suspendCount;
-- (void)terminate;
-- (id /* block */)terminationHandler;
-- (long long)terminationReason;
-- (int)terminationStatus;
-@end
-
-@interface CustomCell : PSTableCell {
-}
+@interface CustomCell : PSTableCell 
 @end
 
 @implementation CustomCell
@@ -88,10 +53,7 @@
 			}
 		}
 	}
-
 	[[UISwitch appearanceWhenContainedInInstancesOfClasses:@[[TOMRootListController class]]] setOnTintColor:[UIColor colorWithRed:1.00 green:0.37 blue:0.42 alpha:1.0]];
-
-
 	return _specifiers;
 }
 
@@ -121,8 +83,6 @@
 		} else if(dismissEnabled == YES && ![self containsSpecifier:self.savedSpecifiers[@"textThree"]]) {
 			[self insertContiguousSpecifiers:@[self.savedSpecifiers[@"textThree"]] afterSpecifierID:@"Dismiss Text" animated:YES];
 		}
-     
-
 }
 
 -(void)viewDidLoad {
@@ -148,51 +108,47 @@
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
-	/* Icon at the top */
-
 	NSBundle *bundle = [[NSBundle alloc]initWithPath:@"/Library/PreferenceBundles/UTrynaShutDown.bundle"];
 
 	UIImage *logo = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"icon" ofType:@"png"]];
 	self.navigationItem.titleView = [[UIImageView alloc]initWithImage:logo];
 
-	/* Respring Button */
-
 	UIBarButtonItem *respringButton = [[UIBarButtonItem alloc] initWithTitle:@"Respring" style:UIBarButtonItemStylePlain target:self action:@selector(respring)];
     self.navigationItem.rightBarButtonItem = respringButton;
-
-	
-
 }
+
+-(void)utrynashutdown {
+
+	UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Hey" message:@"Thank you for downloading UTrynaShutDown!" preferredStyle:UIAlertControllerStyleAlert];
+ 
+	UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+   	handler:^(UIAlertAction * action) {}];
+ 
+	[alert addAction:defaultAction];
+	[self presentViewController:alert animated:YES completion:nil];
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
 
     if (offsetY > 100) {
         [UIView animateWithDuration:0.2 animations:^{
-         
-			self.navigationItem.titleView.alpha = 0.0;
+		self.navigationItem.titleView.alpha = 0.0;
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
-            	self.navigationItem.titleView.alpha = 1.0;
-				
+        self.navigationItem.titleView.alpha = 1.0;
+			
         }];
     }
-
     if (offsetY > 0) offsetY = 0;
-
 }
 
 -(void)respring{
 
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Respring" message:@"Are you sure you want to respring ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
 	[alert show];
-}
-
-
--(void)paypal{
-
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/Thomz07"]];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -219,15 +175,6 @@
 		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textThree"]] animated:YES];
 	}
 	[self reloadSpecifiers];
-}
-// just some tests don't mind about this
--(void)testPrefs:(id)sender{
-	HBPreferences *preferences = [[HBPreferences alloc] initWithIdentifier:@"com.thomz.utrynashutdown"];
-	BOOL test = [preferences boolForKey:@"titleEnabled"];
-	/*id test = [preferences preferencesForIdentifier:@"com.thomz.utrynashutdown"];*/
-	if(test == NO){
-		[self reloadSpecifiers];
-	}
 }
 
 -(PSSpecifier *)specifierForKey:(NSString *)key {

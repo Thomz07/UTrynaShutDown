@@ -28,6 +28,8 @@
 			<string>CustomCell</string>
 			<key>height</key>
 			<integer>100</integer>
+			<key>action</key>
+			<string>utrynashutdown</string>
 		</dict>
 		<dict>
 			<key>cell</key>
