@@ -87,21 +87,11 @@
 
 -(void)viewDidLoad {
 		[super viewDidLoad];
+		[self removeSpecifiers];
+}
 
-		HBPreferences *preferences = [[HBPreferences alloc] initWithIdentifier:@"com.thomz.utrynashutdown"];
-		BOOL titleEnabled = [preferences boolForKey:@"titleEnabled"];
-		BOOL messageEnabled = [preferences boolForKey:@"messageEnabled"];
-		BOOL dismissEnabled = [preferences boolForKey:@"dismissEnabled"];
-
-		if(titleEnabled == NO){
-			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textOne"]] animated:YES];
-		}
-		if(messageEnabled == NO){
-			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textTwo"]] animated:YES];
-		}
-		if(dismissEnabled == NO){
-			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textThree"]] animated:YES];
-		}
+-(void)reloadSpecifiers	{
+	[self removeSpecifiers];
 }
 
 
@@ -169,22 +159,26 @@
 -(void)resetPrefs:(id)sender {
 	HBPreferences *preferences = [[HBPreferences alloc] initWithIdentifier:@"com.thomz.utrynashutdown"];
 	[preferences removeAllObjects];
-	if(![self containsSpecifier:self.savedSpecifiers[@"textTwo"]]){
-		[self insertContiguousSpecifiers:@[self.savedSpecifiers[@"textOne"]] afterSpecifierID:@"Title Text" animated:YES];
-		[self insertContiguousSpecifiers:@[self.savedSpecifiers[@"textTwo"]] afterSpecifierID:@"Message Text" animated:YES];
-		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textThree"]] animated:YES];
-	}
 	[self reloadSpecifiers];
 }
 
--(PSSpecifier *)specifierForKey:(NSString *)key {
-		for(PSSpecifier *specifier in [self specifiers]) {
-			if([[specifier propertyForKey:@"key"] isEqualToString:key]) {
-				return specifier;
-			}
-		}
+-(void)removeSpecifiers {
 
-		return nil;
-	}
+		HBPreferences *preferences = [[HBPreferences alloc] initWithIdentifier:@"com.thomz.utrynashutdown"];
+		BOOL titleEnabled = [preferences boolForKey:@"titleEnabled"];
+		BOOL messageEnabled = [preferences boolForKey:@"messageEnabled"];
+		BOOL dismissEnabled = [preferences boolForKey:@"dismissEnabled"];
+
+		if(titleEnabled == NO){
+			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textOne"]] animated:YES];
+		}
+		if(messageEnabled == NO){
+			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textTwo"]] animated:YES];
+		}
+		if(dismissEnabled == NO){
+			[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"textThree"]] animated:YES];
+		}
+}
+
 
 @end
