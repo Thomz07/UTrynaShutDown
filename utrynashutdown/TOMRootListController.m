@@ -15,13 +15,11 @@
 		UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(90,25,500,30)];
 		[title setNumberOfLines:0];
 		[title setText:@"UTrynaShutDown"];
-		[title setTextColor:[UIColor whiteColor]];
 		[title setFont:[UIFont systemFontOfSize:30]];
 
 		UILabel *developers = [[UILabel alloc] initWithFrame:CGRectMake(90,55,500,20)];
 		[developers setNumberOfLines:0];
 		[developers setText:@"Version 1.3.2"];
-		[developers setTextColor:[UIColor whiteColor]];
 		[developers setFont:[UIFont systemFontOfSize:15]];
 
 		NSBundle *bundle = [[NSBundle alloc]initWithPath:@"/Library/PreferenceBundles/UTrynaShutDown.bundle"];
@@ -29,7 +27,6 @@
 		UIImageView *icon = [[UIImageView alloc]initWithImage:logo];
 		[icon setFrame:CGRectMake(20,22.5,55,55)];
 
-		[self setBackgroundColor:[UIColor colorWithRed:1.00 green:0.37 blue:0.42 alpha:1.0]];
 		[self addSubview:title];
 		[self addSubview:developers];
 		[self addSubview:icon];

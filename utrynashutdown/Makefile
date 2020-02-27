@@ -1,5 +1,7 @@
 include $(THEOS)/makefiles/common.mk
 
+ARCHS = armv7 arm64 arm64e
+
 BUNDLE_NAME = UTrynaShutDown
 
 UTrynaShutDown_FILES = TOMRootListController.m 
