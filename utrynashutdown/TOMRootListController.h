@@ -51,6 +51,9 @@
 - (int)terminationStatus;
 @end
 
+@interface UTrynaShutDownHeaderCell : PSTableCell 
+@end
+
 
 
 

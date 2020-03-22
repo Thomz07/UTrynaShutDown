@@ -4,28 +4,11 @@
 <dict>
 	<key>items</key>
 	<array>
-		<!--<dict>
-			<key>cell</key>
-    		<string>PSGroupCell</string>
-			<key>headerCellClass</key>
-			<string>HBPackageNameHeaderCell</string>
-			<key>label</key>
-			<string>UTrynaShutDown</string>
-			<key>packageIdentifier</key>
-			<string>com.thomz.utrynashutdown</string>
-			<key>backgroundGradientColors</key>
-                <array>
-                    <string>#ff5e6c</string>
-                    <string>#ff4757</string>
-                </array>
-			<key>footerText</key>
-			<string>Note: Respring is not required</string>
-		</dict>-->
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
-			<string>CustomCell</string>
+			<string>UTrynaShutDownHeaderCell</string>
 			<key>height</key>
 			<integer>100</integer>
 			<key>action</key>

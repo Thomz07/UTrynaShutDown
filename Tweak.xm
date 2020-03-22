@@ -2,9 +2,18 @@
 
 #include <Cephei/HBPreferences.h>
 
-@interface SBCoverSheetPresentationManager
+@interface SBCoverSheetPresentationManager 
 -(bool)hasBeenDismissedSinceKeybagLock;
 +(id)sharedInstance;
+@end
+
+@interface SBPowerDownController : UIAlertController
+@end
+
+@interface SBPowerDownViewController : UIAlertController
+@end
+
+@interface SBSOSClawGestureObserver : UIAlertController
 @end
 
         HBPreferences *preferences;
@@ -118,45 +127,85 @@
 
     if(isEnabled){
 
-    UIAlertView *alertView;
+    UIAlertController *alertView;
+    UIAlertAction *defaultAction;
 
     if(titleEnabled && messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && !messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && !messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && !messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && !messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    }  
-
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
+    }
     if(showNothing){
         %orig(NO);
     } else {
         %orig(NO);
-        [alertView show];
+        [self presentViewController:alertView animated:YES completion:nil];
     }
     
     } else {
@@ -176,38 +225,79 @@
 
     if(isEnabled){
 
-    UIAlertView *alertView;
+    UIAlertController *alertView;
+    UIAlertAction *defaultAction;
 
     if(titleEnabled && messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && !messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && !messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:textTwo delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:textTwo
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(titleEnabled && !messageEnabled && dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:textOne message:nil delegate:self cancelButtonTitle:textThree otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:textOne
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:textThree style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     else if(!titleEnabled && !messageEnabled && !dismissEnabled){
-        alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        alertView = [UIAlertController alertControllerWithTitle:nil
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+        defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+        [alertView addAction:defaultAction];
     }
 
     SBCoverSheetPresentationManager *lockManager = (SBCoverSheetPresentationManager *)[%c(SBCoverSheetPresentationManager) sharedInstance];
@@ -219,7 +309,7 @@
     if(emergencyAlert && ![lockManager hasBeenDismissedSinceKeybagLock]){
      
     } else {
-        [alertView show];   
+        [self presentViewController:alertView animated:YES completion:nil]; 
             }
         }  
     }

@@ -4,10 +4,7 @@
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Preferences/PSTableCell.h>
 
-@interface CustomCell : PSTableCell 
-@end
-
-@implementation CustomCell
+@implementation UTrynaShutDownHeaderCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier specifier:specifier];
 
@@ -19,7 +16,7 @@
 
 		UILabel *developers = [[UILabel alloc] initWithFrame:CGRectMake(90,55,500,20)];
 		[developers setNumberOfLines:0];
-		[developers setText:@"Version 1.3.2"];
+		[developers setText:@"Version 1.4"];
 		[developers setFont:[UIFont systemFontOfSize:15]];
 
 		NSBundle *bundle = [[NSBundle alloc]initWithPath:@"/Library/PreferenceBundles/UTrynaShutDown.bundle"];
